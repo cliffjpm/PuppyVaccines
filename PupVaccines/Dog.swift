@@ -73,7 +73,13 @@ class Dog: NSObject, NSCoding {
     }
     
     convenience init?(name: String, dob: Date?, sex: String?, photo: UIImage?){
-        self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: [:])
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let day1 = formatter.date(from: "2016/10/08")
+        let day2 = formatter.date(from: "2017/11/09")
+        let day3 = formatter.date(from: "2018/12/010")
+        let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
+        self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
     }
     
     //MARK: NSCoding

@@ -10,7 +10,7 @@ import UIKit
 import os.log
 
 
-class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource{
 
     
     //MARK: Properties (Outlets)
@@ -33,6 +33,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     let sex = ["Sex", "Male", "Female"]
     var sexSelected: String?
+    
+    var meds: [String] = []
+    var dates: [Date] = []
     
     //MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -98,6 +101,19 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         birthDateTxt.text = dateFormatter.string(from: datePicker.date)
         dobSelected = datePicker.date
         self.view.endEditing(true)
+    }
+    
+    //var meds = ["Ravies", "Flea and Tick", "HeartGuard"]
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (dog?.vaccineDates?.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "vaccineList")
+        cell.textLabel?.text = meds[indexPath.row]
+        
+        return(cell)
     }
     
 
@@ -229,6 +245,11 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             default:
                 fatalError("Unexpected Sex Identifier; \(dog.sex!)")
             }
+            
+            for (med, date) in dog.vaccineDates! {
+             meds.append(med)
+             dates.append(date)
+             }
         
         }
         
