@@ -103,7 +103,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.view.endEditing(true)
     }
     
-    //var meds = ["Ravies", "Flea and Tick", "HeartGuard"]
+    //MARK: Vaccine TableView Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (dog?.vaccineDates?.count)!
@@ -142,7 +142,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let photo = photoImageView.image
         
         
-        // Set the meal to be passed to MealTableViewController after the unwind segue.
+        // Set the dog to be passed to DogTableViewController after the unwind segue.
         dog = Dog(name: name, dob: dob, sex: sex, photo: photo)
     }
     
