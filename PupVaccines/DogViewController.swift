@@ -110,8 +110,21 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "vaccineList")
-        cell.textLabel?.text = meds[indexPath.row]
+        
+        let cellIdentifier = "VaccineTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? VaccineTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of DogTableViewCell.")
+        }
+        
+        cell.dogMeds?.text = meds[indexPath.row]
+        
+        //Set up the date formatter before assigning the date to dogMedDates
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        cell.dogMedDates?.text = dateFormatter.string(from: dates[indexPath.row])
         
         return(cell)
     }
@@ -205,10 +218,25 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+        if pickerLabel == nil {
+            pickerLabel = UILabel()
+            pickerLabel?.font = UIFont(name: (pickerLabel?.font?.fontName)!, size: 13)
+            pickerLabel?.textAlignment = .left
+        }
+        pickerLabel?.text = sex[row]
+        pickerLabel?.textColor = UIColor.blue
+        
+        return pickerLabel!
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        birthDateTxt.font = UIFont(name: (birthDateTxt.font?.fontName)!, size: 13)
+
         // Handle the text field’s user input through delegate callbacks.
         dogNameField.delegate = self
         
