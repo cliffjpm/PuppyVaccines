@@ -157,7 +157,7 @@ class DogTableViewController: UITableViewController {
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
-                // Add a dog meal.
+                // Add a dog.
                 let newIndexPath = IndexPath(row: dogs.count, section: 0)
                 
                 dogs.append(dog)

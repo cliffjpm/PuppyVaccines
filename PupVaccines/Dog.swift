@@ -30,7 +30,7 @@ class Dog: NSObject, NSCoding {
         static let dob = "dob"
         static let sex = "sex"
         static let photo = "photo"
-        static let vaccineDates = "vassinceDates"
+        static let vaccineDates = "vaccineDates"
     }
     
     //MARK: Archiving Paths
@@ -51,18 +51,6 @@ class Dog: NSObject, NSCoding {
                 return nil
         }
         
-        
-        //TODO: Remove this once vaccine functionality is completed
-        /*Some testing code
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        let day1 = formatter.date(from: "2016/10/08")
-        let day2 = formatter.date(from: "2017/11/09")
-        let day3 = formatter.date(from: "2018/12/010")
-        vaccineDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
-        print(vaccineDates)*/
-        
-        
         // Initialize stored properties.
         self.name = name
         self.dob = dob
@@ -80,6 +68,7 @@ class Dog: NSObject, NSCoding {
         let day3 = formatter.date(from: "2018/12/010")
         let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
+        //os_log("These dogs were initialized with a Vaccine Dictionary.", log: OSLog.default, type: .debug)
     }
     
     //MARK: NSCoding
@@ -88,6 +77,8 @@ class Dog: NSObject, NSCoding {
         aCoder.encode(dob, forKey: PropertyKey.dob)
         aCoder.encode(sex, forKey: PropertyKey.sex)
         aCoder.encode(photo, forKey: PropertyKey.photo)
+        aCoder.encode(vaccineDates, forKey: PropertyKey.vaccineDates)
+        //os_log("Encoding the Vaccine Dictionary was successful.", log: OSLog.default, type: .debug)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -102,11 +93,14 @@ class Dog: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         let dob = aDecoder.decodeObject(forKey: PropertyKey.dob) as? Date
         let sex = aDecoder.decodeObject(forKey: PropertyKey.sex) as? String
+        let vaccineDates = aDecoder.decodeObject(forKey: PropertyKey.vaccineDates) as? Dictionary<String, Date>
+        //os_log("Decoding the Vaccine Dictionary was successful.>", log: OSLog.default, type: .debug)
+        //print(vaccineDates)
         
         
     
         // Must call designated initializer.
-        self.init(name: name, dob: dob, sex: sex, photo: photo)
+        self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vaccineDates)
         
     }
     

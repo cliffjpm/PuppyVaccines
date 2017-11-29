@@ -106,7 +106,14 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     //MARK: Vaccine TableView Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dog?.vaccineDates?.count)!
+        var numberOfRows = 0
+        if dog?.vaccineDates?.count == nil {
+            numberOfRows = 0
+        }
+        else {
+            numberOfRows = (dog?.vaccineDates?.count)!
+        }
+        return (numberOfRows)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,14 +160,20 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let dob = dobSelected
         let sex = sexSelected
         let photo = photoImageView.image
+        let vDates = dog?.vaccineDates
+        //os_log("Array of Vaccine Dates is populated", log: OSLog.default, type: .debug)
+        //print(vDates)
         
         
         // Set the dog to be passed to DogTableViewController after the unwind segue.
-        dog = Dog(name: name, dob: dob, sex: sex, photo: photo)
+        dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
+        //os_log("Dog created to pass to DogTavleViewController", log: OSLog.default, type: .debug)
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        os_log("I understand you want to Cancel", log: OSLog.default, type: .debug)// Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        //os_log("I understand you want to Cancel", log: OSLog.default, type: .debug)
+        
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
         if isPresentingInAddMealMode {
@@ -223,7 +236,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         if pickerLabel == nil {
             pickerLabel = UILabel()
             pickerLabel?.font = UIFont(name: (pickerLabel?.font?.fontName)!, size: 13)
-            pickerLabel?.textAlignment = .left
+            pickerLabel?.textAlignment = .center
         }
         pickerLabel?.text = sex[row]
         pickerLabel?.textColor = UIColor.blue
@@ -274,11 +287,12 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 fatalError("Unexpected Sex Identifier; \(dog.sex!)")
             }
             
-            for (med, date) in dog.vaccineDates! {
-             meds.append(med)
-             dates.append(date)
-             }
-        
+            if dog.vaccineDates != nil {
+                for (med, date) in dog.vaccineDates! {
+                    meds.append(med)
+                    dates.append(date)
+                }
+            }
         }
         
         // Enable the Save button only if the text field has a valid Meal name.
