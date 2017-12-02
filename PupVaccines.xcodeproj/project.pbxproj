@@ -10,6 +10,7 @@
 		911009621FCDD3FD007586DA /* VaccineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911009611FCDD3FD007586DA /* VaccineTableViewCell.swift */; };
 		91274CC01F9A587D00883203 /* DogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91274CBF1F9A587D00883203 /* DogTableViewCell.swift */; };
 		91274CC21F9A5EE700883203 /* DogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91274CC11F9A5EE700883203 /* DogTableViewController.swift */; };
+		91648B791FD32F6200C58FC2 /* Vaccines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91648B781FD32F6200C58FC2 /* Vaccines.swift */; };
 		916637FD1F8E664100DEC0B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916637FC1F8E664100DEC0B9 /* AppDelegate.swift */; };
 		916637FF1F8E664100DEC0B9 /* DogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916637FE1F8E664100DEC0B9 /* DogViewController.swift */; };
 		916638021F8E664100DEC0B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916638001F8E664100DEC0B9 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		911009611FCDD3FD007586DA /* VaccineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineTableViewCell.swift; sourceTree = "<group>"; };
 		91274CBF1F9A587D00883203 /* DogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewCell.swift; sourceTree = "<group>"; };
 		91274CC11F9A5EE700883203 /* DogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogTableViewController.swift; sourceTree = "<group>"; };
+		91648B781FD32F6200C58FC2 /* Vaccines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccines.swift; sourceTree = "<group>"; };
 		916637F91F8E664100DEC0B9 /* PupVaccines.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PupVaccines.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		916637FC1F8E664100DEC0B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		916637FE1F8E664100DEC0B9 /* DogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				916638031F8E664100DEC0B9 /* Assets.xcassets */,
 				916638051F8E664100DEC0B9 /* LaunchScreen.storyboard */,
 				916638081F8E664100DEC0B9 /* Info.plist */,
+				91648B781FD32F6200C58FC2 /* Vaccines.swift */,
 			);
 			path = PupVaccines;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				91274CC21F9A5EE700883203 /* DogTableViewController.swift in Sources */,
 				91274CC01F9A587D00883203 /* DogTableViewCell.swift in Sources */,
 				91D004DB1F99106B0091172B /* Dog.swift in Sources */,
+				91648B791FD32F6200C58FC2 /* Vaccines.swift in Sources */,
 				911009621FCDD3FD007586DA /* VaccineTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
