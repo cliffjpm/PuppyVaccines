@@ -13,18 +13,16 @@ import os.log
 class Dog: NSObject, NSCoding {
     
     //MARK: Properties
-    
     var name: String
     var dob: Date?
     var sex: String?
     var photo: UIImage?
     
     //DICTIONARIES unordered pair of key, value pairs of vaccines
-    var vaccineDates: [String: Date]? = [:]
+    var vaccineDates: [String: Array<Date>?]? = [:]
     
     
     //MARK: Types
-    
     struct PropertyKey {
         static let name = "name"
         static let dob = "dob"
@@ -41,7 +39,7 @@ class Dog: NSObject, NSCoding {
     
     //MARK: Initialization
     
-    init?(name: String, dob: Date?, sex: String?, photo: UIImage?, vaccineDates: Dictionary<String, Date>?) {
+    init?(name: String, dob: Date?, sex: String?, photo: UIImage?, vaccineDates: Dictionary<String, Array<Date>?>?) {
         
         //The name must not be empty
         guard !name.isEmpty else {
@@ -58,15 +56,19 @@ class Dog: NSObject, NSCoding {
         self.photo = photo
         self.vaccineDates = vaccineDates
         
+        
     }
     
     convenience init?(name: String, dob: Date?, sex: String?, photo: UIImage?){
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        let day1 = formatter.date(from: "2016/10/08")
-        let day2 = formatter.date(from: "2017/11/09")
-        let day3 = formatter.date(from: "2018/12/010")
-        let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
+        //let formatter = DateFormatter()
+        //formatter.dateFormat = "yyyy/MM/dd"
+        //let day1 = formatter.date(from: "2016/10/08")
+        //let day2 = formatter.date(from: "2017/11/09")
+        //let day3 = formatter.date(from: "2018/12/010")
+        //let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
+        
+        let vDates: [String: Array<Date>?] = [:]
+        
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
         //os_log("These dogs were initialized with a Vaccine Dictionary.", log: OSLog.default, type: .debug)
     }
@@ -85,7 +87,7 @@ class Dog: NSObject, NSCoding {
         
         // The name is required. If we cannot decode a name string, the initializer should fail.
         guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String else {
-            os_log("Unable to decode the name for a Dog object.", log: OSLog.default, type: .debug)
+            //os_log("Unable to decode the name for a Dog object.", log: OSLog.default, type: .debug)
             return nil
         }
         
@@ -93,12 +95,11 @@ class Dog: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         let dob = aDecoder.decodeObject(forKey: PropertyKey.dob) as? Date
         let sex = aDecoder.decodeObject(forKey: PropertyKey.sex) as? String
-        let vaccineDates = aDecoder.decodeObject(forKey: PropertyKey.vaccineDates) as? Dictionary<String, Date>
+        let vaccineDates = aDecoder.decodeObject(forKey: PropertyKey.vaccineDates) as? Dictionary<String, Array<Date>>
         //os_log("Decoding the Vaccine Dictionary was successful.>", log: OSLog.default, type: .debug)
         //print(vaccineDates)
         
         
-    
         // Must call designated initializer.
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vaccineDates)
         

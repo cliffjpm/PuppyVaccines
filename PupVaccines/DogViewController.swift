@@ -188,8 +188,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     
-    
-    
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         
@@ -287,10 +285,11 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 fatalError("Unexpected Sex Identifier; \(dog.sex!)")
             }
             
+            //For an existing dog, were vaccines exist, show a list with the most recent date
             if dog.vaccineDates != nil {
-                for (med, date) in dog.vaccineDates! {
-                    meds.append(med)
-                    dates.append(date)
+                for vaccines in dog.vaccineDates! {
+                    meds.append(vaccines.key)
+                    dates.append((vaccines.value?.max())!)
                 }
             }
         }

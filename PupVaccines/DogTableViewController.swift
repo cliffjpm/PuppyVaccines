@@ -89,9 +89,11 @@ class DogTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             dogs.remove(at: indexPath.row)
-            //Save the new Dog
+            //Save the new dog array
             saveDogs()
+            //Remove the dog from the table
             tableView.deleteRows(at: [indexPath], with: .fade)
+            os_log("Dog successfully deleted.", log: OSLog.default, type: .debug)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -171,27 +173,76 @@ class DogTableViewController: UITableViewController {
     
     //MARK: Private Methods
     
+    //If no records exist, supply sample data for testing.
     private func loadSamples(){
         let photo1 = UIImage(named: "win")
         let photo2 = UIImage(named: "suki")
         let photo3 = UIImage(named: "albus")
         let today = Date()
         
-        guard let dog1 = Dog(name: "Winnie", dob: today, sex: "Female", photo: photo1) else {
+        /*  Set up three data types:
+         an array of Vaccine Types
+         and array of the Dates of Occurance and
+         Dictionary of the types (String) and the array of days (Dates) they occurred*/
+        var vaccineTypes = [String]()
+        var vaccineOccurances = [Date]()
+        var vaccines: [String: Array<Date>?] = [:]
+        
+        //Date formatter with default dates for testing
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let day1 = formatter.date(from: "2016/10/08")
+        let day2 = formatter.date(from: "2018/11/10")
+        let day3 = formatter.date(from: "2017/12/09")
+        
+        //Set up the types available
+        vaccineTypes = ["Rabies",  "Flea & Tick", "HeartGuard"]
+        
+        //Create an emply array of Dictionary
+        vaccines = [vaccineTypes[0]: nil, vaccineTypes[1]: nil, vaccineTypes[2]: nil]
+        
+        //Use the dates to set up an array of vaccine occurances
+        vaccineOccurances = [day1!, day2!, day3!]
+        //sort the dates
+        vaccineOccurances.sort()
+        
+        //vaccineOccurances.max()
+        /*for dateOfOccurances in vaccineOccurances{
+            print(dateOfOccurances)
+        }*/
+        
+        //Set up some a sample of vaccines and occurances as Dictionary (String of  types + arrays of occurances)
+        vaccines = [vaccineTypes[0]: vaccineOccurances, vaccineTypes[1]: vaccineOccurances, vaccineTypes[2]: vaccineOccurances]
+        
+        //Add a date to one oin the array
+        vaccines["Rabies"]??.append(formatter.date(from: "2020/10/08")!)
+        
+        /*for meds in vaccines{
+            print(meds.key + "")
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .none
+            
+            var latestMed: String
+            latestMed = dateFormatter.string(from: (meds.value?.max())!)
+            
+            print(latestMed)
+        }*/
+        
+        guard let dog1 = Dog(name: "Winnie", dob: today, sex: "Female", photo: photo1, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog1")
         }
         
-        guard let dog2 = Dog(name: "Suzi", dob: nil, sex: "Female", photo: photo2) else {
+        guard let dog2 = Dog(name: "Suzi", dob: nil, sex: "Female", photo: photo2, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog2")
         }
         
-        guard let dog3 = Dog(name: "Albus", dob: nil, sex: nil, photo: photo3) else {
+        guard let dog3 = Dog(name: "Albus", dob: nil, sex: nil, photo: photo3, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog3")
         }
         
-        
        dogs += [dog1, dog2, dog3]
-    
         
     }
     
