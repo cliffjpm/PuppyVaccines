@@ -154,7 +154,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
         
-        
         let name = dogNameField.text ?? ""
         let dob = dobSelected
         let sex = sexSelected
@@ -162,7 +161,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let vDates = dog?.vaccineDates
         //os_log("Array of Vaccine Dates is populated", log: OSLog.default, type: .debug)
         //print(vDates)
-        
         
         // Set the dog to be passed to DogTableViewController after the unwind segue.
         dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
@@ -178,8 +176,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             guard let vaccineDetailViewController = segue.destination as? VaccineTableViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
                 }
-         
-        vaccineDetailViewController.dog = dog
+            vaccineDetailViewController.dog = dog
+        case "ShowDetail":
+            os_log("Saving changes and restoring Dog List View.", log: OSLog.default, type: .debug)
          
          default:
          fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
