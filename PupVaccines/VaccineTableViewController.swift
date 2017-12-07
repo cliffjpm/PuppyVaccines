@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 
 class VaccineTableViewController: UITableViewController {
@@ -33,8 +34,10 @@ class VaccineTableViewController: UITableViewController {
         //For an existing dog, were vaccines exist, show a list with the most recent date
         if dog?.vaccineDates != nil {
             for vaccines in (dog?.vaccineDates!)! {
-                meds.append(vaccines.key)
-                dates.append((vaccines.value?.max())!)
+                for occurances in (vaccines.value!) {
+                    meds.append(vaccines.key)
+                    dates.append(occurances)
+                }
             }
         }
         
@@ -52,7 +55,11 @@ class VaccineTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dog?.vaccineDates?.count)!
+        //MARK: Remove these debug statements
+        //var ss = "\(dates.count)"
+        //print("The number of rows is \(ss)")
+        //return (dog?.vaccineDates?.values.count)!
+        return (dates.count)
     }
 
     
