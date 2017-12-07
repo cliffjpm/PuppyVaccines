@@ -144,11 +144,34 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         super.prepare(for: segue, sender: sender)
         
-        /* Configure the destination view controller only when the save button is pressed.
+        //Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            
+            //os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            
+            switch(segue.identifier ?? "") {
+                
+            case "AddVaccine":
+                os_log("Adding a new vaccine.", log: OSLog.default, type: .debug)
+                
+            case "ShowVaccineList":
+                //os_log("Reached the Show Vaccine List case.", log: OSLog.default, type: .debug)
+                guard let vaccineDetailViewController = segue.destination as? VaccineTableViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                vaccineDetailViewController.dog = dog
+            case "ShowDetail":
+                guard let dogDetailViewController = segue.destination as? DogTableViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                os_log("Saving changes and restoring Dog List View.", log: OSLog.default, type: .debug)
+                
+            default:
+                fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            }
+            
             return
-        }*/
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -166,24 +189,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
         //os_log("Dog created to pass to DogTavleViewController", log: OSLog.default, type: .debug)
        
-        switch(segue.identifier ?? "") {
-        
-        case "AddVaccine":
-            os_log("Adding a new vaccine.", log: OSLog.default, type: .debug)
-         
-        case "ShowVaccineList":
-            //os_log("Reached the Show Vaccine List case.", log: OSLog.default, type: .debug)
-            guard let vaccineDetailViewController = segue.destination as? VaccineTableViewController else {
-                fatalError("Unexpected destination: \(segue.destination)")
-                }
-            vaccineDetailViewController.dog = dog
-        case "ShowDetail":
-            os_log("Saving changes and restoring Dog List View.", log: OSLog.default, type: .debug)
-         
-         default:
-         fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
-         }
-    
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
