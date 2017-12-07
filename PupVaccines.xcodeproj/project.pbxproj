@@ -18,6 +18,7 @@
 		916638071F8E664100DEC0B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 916638051F8E664100DEC0B9 /* LaunchScreen.storyboard */; };
 		916638121F8E664100DEC0B9 /* PupVaccinesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916638111F8E664100DEC0B9 /* PupVaccinesTests.swift */; };
 		91D004DB1F99106B0091172B /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D004DA1F99106B0091172B /* Dog.swift */; };
+		CFC42AF41FD8C6A200D081C7 /* VaccineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC42AF31FD8C6A200D081C7 /* VaccineTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		916638111F8E664100DEC0B9 /* PupVaccinesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PupVaccinesTests.swift; sourceTree = "<group>"; };
 		916638131F8E664100DEC0B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91D004DA1F99106B0091172B /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		CFC42AF31FD8C6A200D081C7 /* VaccineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,9 +91,10 @@
 			children = (
 				916637FC1F8E664100DEC0B9 /* AppDelegate.swift */,
 				916637FE1F8E664100DEC0B9 /* DogViewController.swift */,
+				91274CC11F9A5EE700883203 /* DogTableViewController.swift */,
+				CFC42AF31FD8C6A200D081C7 /* VaccineTableViewController.swift */,
 				91274CBF1F9A587D00883203 /* DogTableViewCell.swift */,
 				911009611FCDD3FD007586DA /* VaccineTableViewCell.swift */,
-				91274CC11F9A5EE700883203 /* DogTableViewController.swift */,
 				916638001F8E664100DEC0B9 /* Main.storyboard */,
 				91D004DA1F99106B0091172B /* Dog.swift */,
 				916638031F8E664100DEC0B9 /* Assets.xcassets */,
@@ -220,6 +223,7 @@
 				91274CC01F9A587D00883203 /* DogTableViewCell.swift in Sources */,
 				91D004DB1F99106B0091172B /* Dog.swift in Sources */,
 				91648B791FD32F6200C58FC2 /* Vaccines.swift in Sources */,
+				CFC42AF41FD8C6A200D081C7 /* VaccineTableViewController.swift in Sources */,
 				911009621FCDD3FD007586DA /* VaccineTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

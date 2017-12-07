@@ -14,6 +14,8 @@ class VaccineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dogMeds: UILabel!
     @IBOutlet weak var dogMedDates: UILabel!
+    @IBOutlet weak var vaccineMeds: UILabel!
+    @IBOutlet weak var vaccineMedDates: UILabel!
     
 
     override func awakeFromNib() {

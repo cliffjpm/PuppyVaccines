@@ -139,17 +139,16 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
 
     //MARK: Navigations
     // This method lets you configure a view controller before it's presented.
-    // This method lets you configure a view controller before it's presented.
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         super.prepare(for: segue, sender: sender)
         
-        // Configure the destination view controller only when the save button is pressed.
+        /* Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
-        }
+        }*/
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -168,6 +167,24 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         // Set the dog to be passed to DogTableViewController after the unwind segue.
         dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
         //os_log("Dog created to pass to DogTavleViewController", log: OSLog.default, type: .debug)
+       
+        switch(segue.identifier ?? "") {
+        
+        case "AddVaccine":
+            os_log("Adding a new vaccine.", log: OSLog.default, type: .debug)
+         
+        case "ShowVaccineList":
+            //os_log("Reached the Show Vaccine List case.", log: OSLog.default, type: .debug)
+            guard let vaccineDetailViewController = segue.destination as? VaccineTableViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+                }
+         
+        vaccineDetailViewController.dog = dog
+         
+         default:
+         fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+         }
+    
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
