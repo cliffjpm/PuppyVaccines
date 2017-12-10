@@ -154,8 +154,11 @@ class DogTableViewController: UITableViewController {
     @IBAction func unwindToDogList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DogViewController, let dog = sourceViewController.dog {
             
+            print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
+                print("DEBUG I am updating the dog in the array")
+                print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -257,6 +260,7 @@ class DogTableViewController: UITableViewController {
     }
     
     private func saveDogs() {
+        print("SAVE DODS WAS CALLED")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(dogs, toFile: Dog.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Dogs successfully saved.", log: OSLog.default, type: .debug)

@@ -198,6 +198,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
+            print("DEBUG as you were not in add mode. This got called and the records got saved. Won't work for a New Dog if addimg meds at the same time")
         }
         else {
             fatalError("The ViewController is not inside a navigation controller.")
@@ -335,6 +336,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             print("DEBUD I am back in the Dog view with a new array")
             print(dog.vaccineDates)
             
+            //Reset and fill the arrays for neds and dates
+            meds = []
+            dates = []
             for vaccines in dog.vaccineDates! {
                 meds.append(vaccines.key)
                 dates.append((vaccines.value?.max())!)

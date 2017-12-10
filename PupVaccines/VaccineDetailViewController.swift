@@ -156,13 +156,13 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
         else {
                 print("This did not match the keys")
             dog?.vaccineDates![medSelected!] = [dateSelected!]
-                print("Added an entirely new ned")
+                print("Added an entirely new med")
                 print(dog?.vaccineDates)
         }
 
     
         // Set the dog to be passed to DogTableViewController after the unwind segue.
-        dog = Dog(name: (dog?.name)!, dob: dog?.dob, sex: dog?.sex, photo: dog?.photo, vaccineDates: dog?.vaccineDates)
+        //dog = Dog(name: (dog?.name)!, dob: dog?.dob, sex: dog?.sex, photo: dog?.photo, vaccineDates: dog?.vaccineDates)
         os_log("Dog created to pass to vaccineTavleViewController", log: OSLog.default, type: .debug)
     }
     
