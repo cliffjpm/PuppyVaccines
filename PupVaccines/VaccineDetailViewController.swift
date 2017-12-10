@@ -7,37 +7,31 @@
 //
 
 import UIKit
+import os.log
 
-class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate {
 
     //MARK: Properties (Outlets)
-    @IBOutlet weak var medsText: UITextField!
     @IBOutlet weak var datesText: UITextField!
+    @IBOutlet weak var medPicker: UIPickerView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
     
     var dateFormatter : DateFormatter!
     let datePicker = UIDatePicker()
-    
     var dateSelected: Date?
     
-    let meds = ["Select Med", "Rabies",  "Flea & Tick", "HeartGuard"]
+    
+    let meds = ["Select Med", "Rabies",  "Flea & Tick", "HeartGuard", "Pred"]
     var medSelected: String?
-    
-    //MARK: UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard.
-        //textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //updateSaveButtonState()
-        
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        //saveButton.isEnabled = false
-    }
+
+    /*
+     This value is either passed by `VaccineTableViewController` in `prepare(for:sender:)`
+     or constructed as part of adding a new Vaccine Occurance.
+     */
+    var dog: Dog?
+
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -109,8 +103,10 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Connect data:
+        self.medPicker.delegate = self
+        self.medPicker.dataSource = self
+        createDatePicker()
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,16 +115,73 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    // This method lets you configure a view controller before it's presented.
+    
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button on Vaccine Detail was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+    
+        
+        //For an existing dog, were vaccines exist, show a list with the most recent date
+       os_log("The trouble is with the vaccine dictionary code", log: OSLog.default, type: .debug)
+        var allKeys: [String] = []
+    
+        for vaccineKeys in (dog?.vaccineDates)!{
+            allKeys.append(vaccineKeys.key)
+        }
+        print("DEBUG")
+        print(allKeys)
+    
+        if allKeys.contains(medSelected!){
+            print("This one matches the keys")
+            for vaccine in (dog?.vaccineDates)! {
+                        if vaccine.key == medSelected {
+                        var myDateArray = [dateSelected!]
+                        dog?.vaccineDates![vaccine.key] = vaccine.value! + myDateArray
+                    print("Updated an existing med with a new date")
+                    print(dog?.vaccineDates)
+                }
+                        else{print("I matched the keys but I am not the right med")}
+            }
+        }
+        else {
+                print("This did not match the keys")
+            dog?.vaccineDates![medSelected!] = [dateSelected!]
+                print("Added an entirely new ned")
+                print(dog?.vaccineDates)
+        }
 
     
+        // Set the dog to be passed to DogTableViewController after the unwind segue.
+        dog = Dog(name: (dog?.name)!, dob: dog?.dob, sex: dog?.sex, photo: dog?.photo, vaccineDates: dog?.vaccineDates)
+        os_log("Dog created to pass to vaccineTavleViewController", log: OSLog.default, type: .debug)
+    }
     
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        //os_log("I understand you want to Cancel", log: OSLog.default, type: .debug)
+        
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddMode {
+            dismiss(animated: true, completion: nil)
+        }
+        else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        }
+        else {
+            fatalError("The ViewController is not inside a navigation controller.")
+        }
+    }
 }
+
+

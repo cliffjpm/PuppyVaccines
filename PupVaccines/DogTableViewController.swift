@@ -14,6 +14,7 @@ class DogTableViewController: UITableViewController {
     //MARK: Properties
     var dogs = [Dog]()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -195,6 +196,7 @@ class DogTableViewController: UITableViewController {
         let day2 = formatter.date(from: "2018/11/10")
         let day3 = formatter.date(from: "2017/12/09")
         
+        
         //Set up the types available
         vaccineTypes = ["Rabies",  "Flea & Tick", "HeartGuard"]
         
@@ -211,10 +213,11 @@ class DogTableViewController: UITableViewController {
             print(dateOfOccurances)
         }*/
         
+        
         //Set up some a sample of vaccines and occurances as Dictionary (String of  types + arrays of occurances)
         vaccines = [vaccineTypes[0]: vaccineOccurances, vaccineTypes[1]: vaccineOccurances, vaccineTypes[2]: vaccineOccurances]
         
-        //Add a date to one oin the array
+        //Add a date to one in the array
         vaccines["Rabies"]??.append(formatter.date(from: "2020/10/08")!)
         
         /*for meds in vaccines{
@@ -233,6 +236,13 @@ class DogTableViewController: UITableViewController {
         guard let dog1 = Dog(name: "Winnie", dob: today, sex: "Female", photo: photo1, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog1")
         }
+        
+        //Sample of creating a new type of vaccine
+        var newMed = "MyNewMed"
+        let dayNew = formatter.date(from: "1961/01/11")
+        vaccines[newMed] = [dayNew!]
+        
+        
         
         guard let dog2 = Dog(name: "Suzi", dob: nil, sex: "Female", photo: photo2, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog2")

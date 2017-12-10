@@ -19,6 +19,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var sexPicker: UIPickerView!
     @IBOutlet weak var birthDateTxt: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
     
     /*
      This value is either passed by `DogTableViewController` in `prepare(for:sender:)`
@@ -160,11 +161,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
                 vaccineDetailViewController.dog = dog
-            case "ShowDetail":
-                guard let dogDetailViewController = segue.destination as? DogTableViewController else {
-                    fatalError("Unexpected destination: \(segue.destination)")
-                }
-                os_log("Saving changes and restoring Dog List View.", log: OSLog.default, type: .debug)
                 
             default:
                 fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -195,16 +191,16 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         //os_log("I understand you want to Cancel", log: OSLog.default, type: .debug)
         
         // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        let isPresentingInAddDogMode = presentingViewController is UINavigationController
         
-        if isPresentingInAddMealMode {
+        if isPresentingInAddDogMode {
             dismiss(animated: true, completion: nil)
         }
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
         }
         else {
-            fatalError("The MealViewController is not inside a navigation controller.")
+            fatalError("The ViewController is not inside a navigation controller.")
         }
     }
     
@@ -330,6 +326,31 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let text = dogNameField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
+    
+    //MARK: Actions
+    @IBAction func unwindToDogDetailList(sender: UIStoryboardSegue) {
+        
+     //os_log("unwindToDogDetailList completed", log: OSLog.default, type: .debug)
+        if let sourceViewController = sender.source as? VaccineDetailViewController, let dog = sourceViewController.dog {
+            print("DEBUD I am back in the Dog view with a new array")
+            print(dog.vaccineDates)
+            
+            for vaccines in dog.vaccineDates! {
+                meds.append(vaccines.key)
+                dates.append((vaccines.value?.max())!)
+            }
+            
+            print("DEBUD new meds")
+            print(meds)
+            print("DEBUG new dates")
+            print(dates)
+            
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    
 
 }
 

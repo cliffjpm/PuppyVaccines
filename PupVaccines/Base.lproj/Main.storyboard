@@ -97,7 +97,7 @@
             </objects>
             <point key="canvasLocation" x="-388" y="117.39130434782609"/>
         </scene>
-        <!--New Pup-->
+        <!--Summary-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DogViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
@@ -199,7 +199,7 @@
                                                 <connections>
                                                     <outlet property="dogMedDates" destination="aLX-dZ-U3k" id="2OG-yr-53r"/>
                                                     <outlet property="dogMeds" destination="Zvo-5e-2tT" id="ETJ-GH-R1v"/>
-                                                    <segue destination="fAL-yZ-p23" kind="showDetail" identifier="ShowVaccineList" id="s0p-bG-0Ll"/>
+                                                    <segue destination="fAL-yZ-p23" kind="show" identifier="ShowVaccineList" id="Zps-bm-7Fc"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -220,7 +220,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Pup" id="YeK-SO-lnz">
+                    <navigationItem key="navigationItem" title="Summary" id="YeK-SO-lnz">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dR6-bN-3Xp">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="NNa-de-52x"/>
@@ -238,6 +238,7 @@
                         <outlet property="photoImageView" destination="30G-j4-V42" id="ZdC-xN-8DV"/>
                         <outlet property="saveButton" destination="HDD-CC-zy2" id="JoZ-fT-tv2"/>
                         <outlet property="sexPicker" destination="Esp-ea-BDs" id="zME-15-wxU"/>
+                        <outlet property="tableView" destination="0lq-dc-Rrf" id="fys-Fe-70o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -250,10 +251,10 @@
             </objects>
             <point key="canvasLocation" x="1280.8" y="116.49175412293854"/>
         </scene>
-        <!--Vaccine Table View Controller-->
+        <!--Medications Taken-->
         <scene sceneID="RPN-GD-Ueb">
             <objects>
-                <tableViewController id="fAL-yZ-p23" customClass="VaccineTableViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Meds Taken" id="fAL-yZ-p23" customClass="VaccineTableViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9TR-bR-CHo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -303,63 +304,99 @@
                             <outlet property="delegate" destination="fAL-yZ-p23" id="4PS-L0-DS6"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Medications Taken" id="BQX-Gw-qdb">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="BCS-S8-vzl">
+                            <connections>
+                                <segue destination="MG2-Ly-PKh" kind="show" identifier="AddMed" id="SO5-E5-KDT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hi-dP-am8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2134" y="119"/>
+            <point key="canvasLocation" x="2876" y="149"/>
         </scene>
-        <!--Vaccine Detail View Controller-->
+        <!--Medication Entry-->
         <scene sceneID="VNz-eT-ZoY">
             <objects>
-                <viewController id="MG2-Ly-PKh" customClass="VaccineDetailViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Medication Entry" title="Medication Entry" id="MG2-Ly-PKh" customClass="VaccineDetailViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4zx-AA-QYW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Medication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ss-E1-bJr">
-                                <rect key="frame" x="16" y="35" width="164" height="21"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-lO-7lI">
+                                <rect key="frame" x="16" y="124" width="308" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date Given" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-aj-4yd">
-                                <rect key="frame" x="191" y="35" width="168" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Med" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RXz-Pu-U1x">
-                                <rect key="frame" x="16" y="64" width="164" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="swQ-vV-YWb"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmm-Ad-qYV">
-                                <rect key="frame" x="191" y="64" width="168" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Xue-ef-b6C"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OL0-XF-Ckp">
+                                        <rect key="frame" x="0.0" y="0.0" width="308" height="16"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Medication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ss-E1-bJr">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="Yd0-Ae-mDp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date Given" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-aj-4yd">
+                                                <rect key="frame" x="158" y="0.0" width="150" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="6Xj-kW-4yG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ClJ-wv-SkR">
+                                        <rect key="frame" x="0.0" y="26" width="308" height="45"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5l-No-M1e">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="Ba5-L7-bLq"/>
+                                                    <constraint firstAttribute="height" constant="45" id="drC-Cl-a4x"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jVW-vo-8ga">
+                                                <rect key="frame" x="158" y="0.0" width="150" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="YUU-DH-2bA"/>
+                                                    <constraint firstAttribute="height" constant="45" id="sIT-Z9-OQY"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iJk-kd-zhk"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Medication Entry" id="mTr-uN-oRP">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="s6X-5r-H7W"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="dfd-db-tI1">
+                            <connections>
+                                <segue destination="jdJ-YX-NPX" kind="unwind" unwindAction="unwindToDogDetailListWithSender:" id="RbI-YN-b5b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="datesText" destination="Gmm-Ad-qYV" id="jpp-VP-a9o"/>
-                        <outlet property="medsText" destination="RXz-Pu-U1x" id="iKh-ZW-fbZ"/>
+                        <outlet property="datesText" destination="jVW-vo-8ga" id="LIR-bn-cUc"/>
+                        <outlet property="medPicker" destination="o5l-No-M1e" id="d8S-uh-IfK"/>
+                        <outlet property="saveButton" destination="dfd-db-tI1" id="h0G-8T-ZWL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ia6-8Y-Xez" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jdJ-YX-NPX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2888.8000000000002" y="122.78860569715144"/>
+            <point key="canvasLocation" x="4519.1999999999998" y="115.59220389805098"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jZg-Nr-oN6">
@@ -397,11 +434,49 @@
             </objects>
             <point key="canvasLocation" x="425" y="524"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Stj-d6-bZ0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ru-nT-CU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wfd-oL-xyp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LWU-U6-O7T">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fAL-yZ-p23" kind="relationship" relationship="rootViewController" id="pvY-JJ-YH2"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2047" y="524"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AI9-GV-66d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1V-p3-Xog" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Py2-VR-Nik">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MG2-Ly-PKh" kind="relationship" relationship="rootViewController" id="UIF-0Q-hTj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bvb-8y-HfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3662" y="524"/>
+        </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iLf-2a-sbv"/>
+        <segue reference="SO5-E5-KDT"/>
+        <segue reference="Zps-bm-7Fc"/>
+        <segue reference="dHf-KU-7Cp"/>
     </inferredMetricsTieBreakers>
 </document>
