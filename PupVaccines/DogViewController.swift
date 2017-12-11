@@ -351,6 +351,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             
             self.tableView.reloadData()
             
+            let DTVC = DogTableViewController()
+            DTVC.updateVaccines(dog: dog)
+            
         }
     }
     

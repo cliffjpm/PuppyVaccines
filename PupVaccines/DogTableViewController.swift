@@ -154,6 +154,8 @@ class DogTableViewController: UITableViewController {
     @IBAction func unwindToDogList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DogViewController, let dog = sourceViewController.dog {
             
+            print("What is the Sender?")
+            print(sender)
             print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
@@ -173,6 +175,21 @@ class DogTableViewController: UITableViewController {
             //Save the new Dog
             saveDogs()
         }
+    }
+    
+    func updateVaccines(dog: Dog) {
+       
+            print("DEBUG Special fuction to update Vaccines")
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing dog.
+                print("DEBUG I am updating vaccines for one dog in the array")
+                print(dog.vaccineDates)
+                dogs[selectedIndexPath.row] = dog
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+        
+            //Save the new Dog
+            saveDogs()
     }
     
     //MARK: Private Methods
@@ -241,7 +258,7 @@ class DogTableViewController: UITableViewController {
         }
         
         //Sample of creating a new type of vaccine
-        var newMed = "MyNewMed"
+        let newMed = "MyNewMed"
         let dayNew = formatter.date(from: "1961/01/11")
         vaccines[newMed] = [dayNew!]
         

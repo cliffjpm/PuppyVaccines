@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tDr-Wg-XzT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tDr-Wg-XzT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -325,25 +325,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-lO-7lI">
-                                <rect key="frame" x="16" y="124" width="308" height="71"/>
+                                <rect key="frame" x="9" y="91" width="208" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OL0-XF-Ckp">
-                                        <rect key="frame" x="0.0" y="0.0" width="308" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Medication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ss-E1-bJr">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="Yd0-Ae-mDp"/>
+                                                    <constraint firstAttribute="width" constant="100" id="Yd0-Ae-mDp"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date Given" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-aj-4yd">
-                                                <rect key="frame" x="158" y="0.0" width="150" height="16"/>
+                                                <rect key="frame" x="108" y="0.0" width="100" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="6Xj-kW-4yG"/>
+                                                    <constraint firstAttribute="width" constant="100" id="6Xj-kW-4yG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <nil key="textColor"/>
@@ -352,23 +352,25 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ClJ-wv-SkR">
-                                        <rect key="frame" x="0.0" y="26" width="308" height="45"/>
+                                        <rect key="frame" x="0.0" y="26" width="208" height="45"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5l-No-M1e">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                                <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="0.28938356164383561" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="Ba5-L7-bLq"/>
+                                                    <constraint firstAttribute="width" constant="100" id="Ba5-L7-bLq"/>
                                                     <constraint firstAttribute="height" constant="45" id="drC-Cl-a4x"/>
                                                 </constraints>
                                             </pickerView>
                                             <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jVW-vo-8ga">
-                                                <rect key="frame" x="158" y="0.0" width="150" height="45"/>
+                                                <rect key="frame" x="108" y="0.0" width="100" height="45"/>
+                                                <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="0.28842037671232879" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="YUU-DH-2bA"/>
+                                                    <constraint firstAttribute="width" constant="100" id="YUU-DH-2bA"/>
                                                     <constraint firstAttribute="height" constant="45" id="sIT-Z9-OQY"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
@@ -437,7 +439,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Stj-d6-bZ0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ru-nT-CU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wfd-oL-xyp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LWU-U6-O7T">
@@ -449,6 +450,7 @@
                         <segue destination="fAL-yZ-p23" kind="relationship" relationship="rootViewController" id="pvY-JJ-YH2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ru-nT-CU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2047" y="524"/>
         </scene>
