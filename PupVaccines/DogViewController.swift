@@ -22,9 +22,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
-    //TODO: I do not believe this function is ever called. Test to see if it can be removed
-    @IBAction func medicationEntry(_ sender: UIButton) {
-      print("It was looking for the function medicationEntry")
+   
+    @IBAction func dateFieldTouched(_ sender: Any) {
+        saveButton.isEnabled = false
     }
     
     
@@ -109,6 +109,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         birthDateTxt.text = dateFormatter.string(from: datePicker.date)
         dobSelected = datePicker.date
         self.view.endEditing(true)
+        saveButton.isEnabled = true
     }
     
     

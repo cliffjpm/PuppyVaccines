@@ -154,6 +154,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="dateFieldTouched:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="BaP-ZX-tbu"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -163,7 +166,6 @@
                                         <rect key="frame" x="0.0" y="128" width="375" height="0.0"/>
                                         <state key="normal" title="Add"/>
                                         <connections>
-                                            <action selector="medicationEntry:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiN-5Q-Twg"/>
                                             <segue destination="MG2-Ly-PKh" kind="show" identifier="AddMedFromDogDetail" id="Jeo-dz-cX8"/>
                                         </connections>
                                     </button>
