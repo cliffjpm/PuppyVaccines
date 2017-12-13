@@ -109,7 +109,7 @@
                                 <rect key="frame" x="0.0" y="68" width="375" height="599"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fOT-eh-ctP">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="30G-j4-V42">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -159,8 +159,16 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Og-Td-pUe">
+                                        <rect key="frame" x="0.0" y="128" width="375" height="0.0"/>
+                                        <state key="normal" title="Add"/>
+                                        <connections>
+                                            <action selector="medicationEntry:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiN-5Q-Twg"/>
+                                            <segue destination="MG2-Ly-PKh" kind="show" identifier="AddMedFromDogDetail" id="Jeo-dz-cX8"/>
+                                        </connections>
+                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0lq-dc-Rrf">
-                                        <rect key="frame" x="0.0" y="132" width="375" height="467"/>
+                                        <rect key="frame" x="0.0" y="136" width="375" height="463"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VaccineTableViewCell" id="R5c-jm-SWK" customClass="VaccineTableViewCell" customModule="PupVaccines" customModuleProvider="target">
@@ -233,6 +241,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="5Og-Td-pUe" id="cLV-DC-bK1"/>
                         <outlet property="birthDateTxt" destination="BC9-rV-lEn" id="sKd-CK-9Fn"/>
                         <outlet property="dogNameField" destination="5HX-zu-Yng" id="WTB-wz-rUj"/>
                         <outlet property="photoImageView" destination="30G-j4-V42" id="ZdC-xN-8DV"/>
@@ -249,7 +258,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1280.8" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1258" y="116"/>
         </scene>
         <!--Medications Taken-->
         <scene sceneID="RPN-GD-Ueb">
@@ -402,7 +411,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ia6-8Y-Xez" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="jdJ-YX-NPX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4519.1999999999998" y="115.59220389805098"/>
+            <point key="canvasLocation" x="3662" y="-569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jZg-Nr-oN6">
@@ -474,14 +483,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bvb-8y-HfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3662" y="524"/>
+            <point key="canvasLocation" x="4412" y="-570"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SO5-E5-KDT"/>
+        <segue reference="Jeo-dz-cX8"/>
         <segue reference="Zps-bm-7Fc"/>
         <segue reference="dHf-KU-7Cp"/>
     </inferredMetricsTieBreakers>

@@ -136,6 +136,18 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
        os_log("The trouble is with the vaccine dictionary code", log: OSLog.default, type: .debug)
         var allKeys: [String] = []
     
+    //TDDO: Test to see if this check for a nil value is required
+    if (dog?.vaccineDates) == nil {
+        let newMedDictionary = [medSelected!: [dateSelected!]]
+        dog?.vaccineDates? = newMedDictionary
+        print(newMedDictionary)
+        print("Setting up a new dog with the first med: " )
+        print(medSelected)
+        print(dateSelected)
+        //dog?.vaccineDates![medSelected!] = [dateSelected!]
+        print(dog?.vaccineDates)
+    }
+    else {
         for vaccineKeys in (dog?.vaccineDates)!{
             allKeys.append(vaccineKeys.key)
         }
@@ -159,6 +171,7 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
             dog?.vaccineDates![medSelected!] = [dateSelected!]
             //Added an entirely new med
         }
+    }
     }
     
     @IBAction func cancel(_ sender: Any) {

@@ -20,6 +20,13 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var birthDateTxt: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addButton: UIButton!
+    
+    //TODO: I do not believe this function is ever called. Test to see if it can be removed
+    @IBAction func medicationEntry(_ sender: UIButton) {
+      print("It was looking for the function medicationEntry")
+    }
+    
     
     /*
      This value is either passed by `DogTableViewController` in `prepare(for:sender:)`
@@ -104,6 +111,8 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         self.view.endEditing(true)
     }
     
+    
+    
     //MARK: Vaccine TableView Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -157,7 +166,15 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 
             case "ShowVaccineList":
                 //os_log("Reached the Show Vaccine List case.", log: OSLog.default, type: .debug)
-                guard let vaccineDetailViewController = segue.destination as? VaccineTableViewController else {
+                guard let vaccineTablelViewController = segue.destination as? VaccineTableViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                vaccineTablelViewController.dog = dog
+                
+            case "AddMedFromDogDetail":
+                os_log("Adding a new med entry", log: OSLog.default, type: .debug)
+                
+                guard let vaccineDetailViewController = segue.destination as? VaccineDetailViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
                 vaccineDetailViewController.dog = dog
@@ -169,6 +186,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             return
         }
         
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
@@ -177,7 +195,11 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let dob = dobSelected
         let sex = sexSelected
         let photo = photoImageView.image
-        let vDates = dog?.vaccineDates
+        var vDates: [String: Array<Date>?] = [:]
+        
+        if (dog?.vaccineDates != nil) {
+            vDates = (dog?.vaccineDates)!
+        }
         //os_log("Array of Vaccine Dates is populated", log: OSLog.default, type: .debug)
         //print(vDates)
         

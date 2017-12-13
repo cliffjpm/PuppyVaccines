@@ -154,8 +154,8 @@ class DogTableViewController: UITableViewController {
     @IBAction func unwindToDogList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DogViewController, let dog = sourceViewController.dog {
             
-            print("What is the Sender?")
-            print(sender)
+            //print("What is the Sender?")
+            //print(sender)
             print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
