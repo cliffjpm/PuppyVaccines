@@ -156,11 +156,11 @@ class DogTableViewController: UITableViewController {
             
             //print("What is the Sender?")
             //print(sender)
-            print("DEBUG Unwind was called")
+            //print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
-                print("DEBUG I am updating the dog in the array")
-                print(dog.vaccineDates)
+                //print("DEBUG I am updating the dog in the array")
+                //print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -179,11 +179,11 @@ class DogTableViewController: UITableViewController {
     
     func updateVaccines(dog: Dog) {
        
-            print("DEBUG Special fuction to update Vaccines")
+            //print("DEBUG Special fuction to update Vaccines")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
-                print("DEBUG I am updating vaccines for one dog in the array")
-                print(dog.vaccineDates)
+                //print("DEBUG I am updating vaccines for one dog in the array")
+                //print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -230,7 +230,7 @@ class DogTableViewController: UITableViewController {
         
         //vaccineOccurances.max()
         /*for dateOfOccurances in vaccineOccurances{
-            print(dateOfOccurances)
+            //print(dateOfOccurances)
         }*/
         
         
@@ -277,7 +277,7 @@ class DogTableViewController: UITableViewController {
     }
     
     private func saveDogs() {
-        print("SAVE DODS WAS CALLED")
+        //print("SAVE DODS WAS CALLED")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(dogs, toFile: Dog.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Dogs successfully saved.", log: OSLog.default, type: .debug)

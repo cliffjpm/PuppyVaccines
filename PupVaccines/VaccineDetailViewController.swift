@@ -140,22 +140,22 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     if (dog?.vaccineDates) == nil {
         let newMedDictionary = [medSelected!: [dateSelected!]]
         dog?.vaccineDates? = newMedDictionary
-        print(newMedDictionary)
-        print("Setting up a new dog with the first med: " )
-        print(medSelected)
-        print(dateSelected)
+        //print(newMedDictionary)
+        //("Setting up a new dog with the first med: " )
+        //print(medSelected)
+        //print(dateSelected)
         //dog?.vaccineDates![medSelected!] = [dateSelected!]
-        print(dog?.vaccineDates)
+        //print(dog?.vaccineDates)
     }
     else {
         for vaccineKeys in (dog?.vaccineDates)!{
             allKeys.append(vaccineKeys.key)
         }
-        print("DEBUG")
-        print(allKeys)
+        //print("DEBUG")
+        //print(allKeys)
     
         if allKeys.contains(medSelected!){
-            print("This one matches the keys")
+            //print("This one matches the keys")
             for vaccine in (dog?.vaccineDates)! {
                     //Update an existing med with a new date
                     if vaccine.key == medSelected {
@@ -215,11 +215,11 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
         // Disable the Save button if the date is not set or there is no medication selected
         if (datesText.text == "Date") || (medSelected == nil){
             saveButton.isEnabled = false
-            print("DEBUG: save button disabled")
+           // print("DEBUG: save button disabled")
         }
         else {
           saveButton.isEnabled = true
-            print("DEBUG: save button enabled")
+            //print("DEBUG: save button enabled")
         }
     }
 

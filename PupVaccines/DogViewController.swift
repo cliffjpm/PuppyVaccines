@@ -78,6 +78,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
         
+        //Dedubbing picture
+        //dog?.photo = photoImageView.image
+        
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
@@ -195,7 +198,9 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         let name = dogNameField.text ?? ""
         let dob = dobSelected
         let sex = sexSelected
-        let photo = photoImageView.image
+        var photo = photoImageView.image
+        //print("DEBUG: Photo is:")
+        //print(photo)
         var vDates: [String: Array<Date>?] = [:]
         
         if (dog?.vaccineDates != nil) {
@@ -206,6 +211,8 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         // Set the dog to be passed to DogTableViewController after the unwind segue.
         dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
+        //print("DEBUG testing to see what picture is in the new dog")
+        //print(dog?.photo)
         //os_log("Dog created to pass to DogTavleViewController", log: OSLog.default, type: .debug)
        
     }
@@ -221,7 +228,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
-            print("DEBUG as you were not in add mode. This got called and the records got saved. Won't work for a New Dog if addimg meds at the same time")
+            //print("DEBUG as you were not in add mode. This got called and the records got saved. Won't work for a New Dog if addimg meds at the same time")
         }
         else {
             fatalError("The ViewController is not inside a navigation controller.")
@@ -356,8 +363,8 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         
      //os_log("unwindToDogDetailList completed", log: OSLog.default, type: .debug)
         if let sourceViewController = sender.source as? VaccineDetailViewController, let dog = sourceViewController.dog {
-            print("DEBUD I am back in the Dog view with a new array")
-            print(dog.vaccineDates)
+            //print("DEBUD I am back in the Dog view with a new array")
+            //print(dog.vaccineDates)
             
             //Reset and fill the arrays for neds and dates
             meds = []
@@ -367,10 +374,10 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 dates.append((vaccines.value?.max())!)
             }
             
-            print("DEBUD new meds")
-            print(meds)
-            print("DEBUG new dates")
-            print(dates)
+            //print("DEBUD new meds")
+            //print(meds)
+            //print("DEBUG new dates")
+            //print(dates)
             
             self.tableView.reloadData()
             
