@@ -14,6 +14,7 @@ class DogTableViewController: UITableViewController {
     //MARK: Properties
     var dogs = [Dog]()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,8 +154,13 @@ class DogTableViewController: UITableViewController {
     @IBAction func unwindToDogList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DogViewController, let dog = sourceViewController.dog {
             
+            //print("What is the Sender?")
+            //print(sender)
+            //print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
+                //print("DEBUG I am updating the dog in the array")
+                //print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -169,6 +175,21 @@ class DogTableViewController: UITableViewController {
             //Save the new Dog
             saveDogs()
         }
+    }
+    
+    func updateVaccines(dog: Dog) {
+       
+            //print("DEBUG Special fuction to update Vaccines")
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing dog.
+                //print("DEBUG I am updating vaccines for one dog in the array")
+                //print(dog.vaccineDates)
+                dogs[selectedIndexPath.row] = dog
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+        
+            //Save the new Dog
+            saveDogs()
     }
     
     //MARK: Private Methods
@@ -195,6 +216,7 @@ class DogTableViewController: UITableViewController {
         let day2 = formatter.date(from: "2018/11/10")
         let day3 = formatter.date(from: "2017/12/09")
         
+        
         //Set up the types available
         vaccineTypes = ["Rabies",  "Flea & Tick", "HeartGuard"]
         
@@ -208,13 +230,14 @@ class DogTableViewController: UITableViewController {
         
         //vaccineOccurances.max()
         /*for dateOfOccurances in vaccineOccurances{
-            print(dateOfOccurances)
+            //print(dateOfOccurances)
         }*/
+        
         
         //Set up some a sample of vaccines and occurances as Dictionary (String of  types + arrays of occurances)
         vaccines = [vaccineTypes[0]: vaccineOccurances, vaccineTypes[1]: vaccineOccurances, vaccineTypes[2]: vaccineOccurances]
         
-        //Add a date to one oin the array
+        //Add a date to one in the array
         vaccines["Rabies"]??.append(formatter.date(from: "2020/10/08")!)
         
         /*for meds in vaccines{
@@ -234,6 +257,13 @@ class DogTableViewController: UITableViewController {
             fatalError("Unable to instantiate dog1")
         }
         
+        //Sample of creating a new type of vaccine
+        let newMed = "MyNewMed"
+        let dayNew = formatter.date(from: "1961/01/11")
+        vaccines[newMed] = [dayNew!]
+        
+        
+        
         guard let dog2 = Dog(name: "Suzi", dob: nil, sex: "Female", photo: photo2, vaccineDates: vaccines) else {
             fatalError("Unable to instantiate dog2")
         }
@@ -247,6 +277,7 @@ class DogTableViewController: UITableViewController {
     }
     
     private func saveDogs() {
+        //print("SAVE DODS WAS CALLED")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(dogs, toFile: Dog.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Dogs successfully saved.", log: OSLog.default, type: .debug)

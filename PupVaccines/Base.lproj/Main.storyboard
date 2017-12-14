@@ -97,7 +97,7 @@
             </objects>
             <point key="canvasLocation" x="-388" y="117.39130434782609"/>
         </scene>
-        <!--New Pup-->
+        <!--Summary-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="DogViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
@@ -109,7 +109,7 @@
                                 <rect key="frame" x="0.0" y="68" width="375" height="599"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fOT-eh-ctP">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="30G-j4-V42">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -154,13 +154,23 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="dateFieldTouched:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="BaP-ZX-tbu"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Og-Td-pUe">
+                                        <rect key="frame" x="0.0" y="128" width="375" height="0.0"/>
+                                        <state key="normal" title="Add"/>
+                                        <connections>
+                                            <segue destination="MG2-Ly-PKh" kind="show" identifier="AddMedFromDogDetail" id="Jeo-dz-cX8"/>
+                                        </connections>
+                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0lq-dc-Rrf">
-                                        <rect key="frame" x="0.0" y="132" width="375" height="467"/>
+                                        <rect key="frame" x="0.0" y="136" width="375" height="463"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VaccineTableViewCell" id="R5c-jm-SWK" customClass="VaccineTableViewCell" customModule="PupVaccines" customModuleProvider="target">
@@ -199,6 +209,7 @@
                                                 <connections>
                                                     <outlet property="dogMedDates" destination="aLX-dZ-U3k" id="2OG-yr-53r"/>
                                                     <outlet property="dogMeds" destination="Zvo-5e-2tT" id="ETJ-GH-R1v"/>
+                                                    <segue destination="fAL-yZ-p23" kind="show" identifier="ShowVaccineList" id="Zps-bm-7Fc"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -219,7 +230,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Pup" id="YeK-SO-lnz">
+                    <navigationItem key="navigationItem" title="Summary" id="YeK-SO-lnz">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dR6-bN-3Xp">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="NNa-de-52x"/>
@@ -227,16 +238,18 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="HDD-CC-zy2">
                             <connections>
-                                <segue destination="YWZ-dg-sYs" kind="unwind" unwindAction="unwindToDogListWithSender:" id="f6z-dm-281"/>
+                                <segue destination="YWZ-dg-sYs" kind="unwind" unwindAction="unwindToDogListWithSender:" id="ieu-PV-ACW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="5Og-Td-pUe" id="cLV-DC-bK1"/>
                         <outlet property="birthDateTxt" destination="BC9-rV-lEn" id="sKd-CK-9Fn"/>
                         <outlet property="dogNameField" destination="5HX-zu-Yng" id="WTB-wz-rUj"/>
                         <outlet property="photoImageView" destination="30G-j4-V42" id="ZdC-xN-8DV"/>
                         <outlet property="saveButton" destination="HDD-CC-zy2" id="JoZ-fT-tv2"/>
                         <outlet property="sexPicker" destination="Esp-ea-BDs" id="zME-15-wxU"/>
+                        <outlet property="tableView" destination="0lq-dc-Rrf" id="fys-Fe-70o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -247,7 +260,160 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1280.8" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1258" y="116"/>
+        </scene>
+        <!--Medications Taken-->
+        <scene sceneID="RPN-GD-Ueb">
+            <objects>
+                <tableViewController storyboardIdentifier="Meds Taken" id="fAL-yZ-p23" customClass="VaccineTableViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9TR-bR-CHo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VaccineTableViewCell" id="3yc-Ay-OMs" customClass="VaccineTableViewCell" customModule="PupVaccines" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3yc-Ay-OMs" id="DGv-LN-NmL">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D6Q-m7-RsE">
+                                            <rect key="frame" x="16" y="13" width="208" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Med" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oT-2A-eQh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="4Q0-eB-QFV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WlX-aV-tWo">
+                                                    <rect key="frame" x="108" y="0.0" width="100" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="AcM-ck-1ul"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="vaccineMedDates" destination="WlX-aV-tWo" id="IPU-bm-dZH"/>
+                                    <outlet property="vaccineMeds" destination="7oT-2A-eQh" id="aGI-ni-CRm"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fAL-yZ-p23" id="x6P-h8-zom"/>
+                            <outlet property="delegate" destination="fAL-yZ-p23" id="4PS-L0-DS6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Medications Taken" id="BQX-Gw-qdb">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="BCS-S8-vzl">
+                            <connections>
+                                <segue destination="MG2-Ly-PKh" kind="show" identifier="AddMed" id="SO5-E5-KDT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hi-dP-am8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2876" y="149"/>
+        </scene>
+        <!--Medication Entry-->
+        <scene sceneID="VNz-eT-ZoY">
+            <objects>
+                <viewController storyboardIdentifier="Medication Entry" title="Medication Entry" id="MG2-Ly-PKh" customClass="VaccineDetailViewController" customModule="PupVaccines" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4zx-AA-QYW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-lO-7lI">
+                                <rect key="frame" x="9" y="91" width="208" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OL0-XF-Ckp">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="16"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Medication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ss-E1-bJr">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Yd0-Ae-mDp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date Given" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-aj-4yd">
+                                                <rect key="frame" x="108" y="0.0" width="100" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="6Xj-kW-4yG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ClJ-wv-SkR">
+                                        <rect key="frame" x="0.0" y="26" width="208" height="45"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o5l-No-M1e">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                                <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="0.28938356164383561" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Ba5-L7-bLq"/>
+                                                    <constraint firstAttribute="height" constant="45" id="drC-Cl-a4x"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jVW-vo-8ga">
+                                                <rect key="frame" x="108" y="0.0" width="100" height="45"/>
+                                                <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="0.28842037671232879" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="YUU-DH-2bA"/>
+                                                    <constraint firstAttribute="height" constant="45" id="sIT-Z9-OQY"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iJk-kd-zhk"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Medication Entry" id="mTr-uN-oRP">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="s6X-5r-H7W">
+                            <connections>
+                                <action selector="cancel:" destination="MG2-Ly-PKh" id="ew1-GP-Zaa"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="dfd-db-tI1">
+                            <connections>
+                                <segue destination="jdJ-YX-NPX" kind="unwind" unwindAction="unwindToDogDetailListWithSender:" id="RbI-YN-b5b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datesText" destination="jVW-vo-8ga" id="LIR-bn-cUc"/>
+                        <outlet property="medPicker" destination="o5l-No-M1e" id="d8S-uh-IfK"/>
+                        <outlet property="saveButton" destination="dfd-db-tI1" id="h0G-8T-ZWL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ia6-8Y-Xez" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jdJ-YX-NPX" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3662" y="-569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jZg-Nr-oN6">
@@ -285,11 +451,49 @@
             </objects>
             <point key="canvasLocation" x="425" y="524"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Stj-d6-bZ0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wfd-oL-xyp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LWU-U6-O7T">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fAL-yZ-p23" kind="relationship" relationship="rootViewController" id="pvY-JJ-YH2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ru-nT-CU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2047" y="524"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AI9-GV-66d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1V-p3-Xog" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Py2-VR-Nik">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MG2-Ly-PKh" kind="relationship" relationship="rootViewController" id="UIF-0Q-hTj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bvb-8y-HfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4412" y="-570"/>
+        </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Jeo-dz-cX8"/>
+        <segue reference="Zps-bm-7Fc"/>
         <segue reference="dHf-KU-7Cp"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -31,15 +31,16 @@ class Dog: NSObject, NSCoding {
         static let vaccineDates = "vaccineDates"
     }
     
-    //MARK: Archiving Paths
-    
-    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("dogs")
-    
-    
+
     //MARK: Initialization
     
     init?(name: String, dob: Date?, sex: String?, photo: UIImage?, vaccineDates: Dictionary<String, Array<Date>?>?) {
+        //let formatter = DateFormatter()
+        //formatter.dateFormat = "yyyy/MM/dd"
+        //let day1 = formatter.date(from: "2016/10/08")
+        //let day2 = formatter.date(from: "2017/11/09")
+        //let day3 = formatter.date(from: "2018/12/010")
+        //let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
         
         //The name must not be empty
         guard !name.isEmpty else {
@@ -56,22 +57,29 @@ class Dog: NSObject, NSCoding {
         self.photo = photo
         self.vaccineDates = vaccineDates
         
+        //self.vaccineDates = ["": [day1!]]
+        //print("DEBUG (Init) When creating a new dog the vaccine dictionary is: ")
+        //print(self.vaccineDates)
         
     }
     
     convenience init?(name: String, dob: Date?, sex: String?, photo: UIImage?){
-        //let formatter = DateFormatter()
-        //formatter.dateFormat = "yyyy/MM/dd"
-        //let day1 = formatter.date(from: "2016/10/08")
-        //let day2 = formatter.date(from: "2017/11/09")
-        //let day3 = formatter.date(from: "2018/12/010")
-        //let vDates = ["Rabies": day1!, "HeartGuard": day2!, "Flea & Tick": day3!]
+        
         
         let vDates: [String: Array<Date>?] = [:]
+        //print("DEBUG (Convenience) When creating a new dog the vaccine dictionary is: ")
+        //print(vDates)
         
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
         //os_log("These dogs were initialized with a Vaccine Dictionary.", log: OSLog.default, type: .debug)
     }
+    
+
+    
+    //MARK: Archiving Paths
+    
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("dogs")
     
     //MARK: NSCoding
     func encode(with aCoder: NSCoder) {
@@ -104,5 +112,4 @@ class Dog: NSObject, NSCoding {
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vaccineDates)
         
     }
-    
 }
