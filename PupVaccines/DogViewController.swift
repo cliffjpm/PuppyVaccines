@@ -166,7 +166,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             switch(segue.identifier ?? "") {
                 
             case "AddVaccine":
-                os_log("Adding a new vaccine.", log: OSLog.default, type: .debug)
+                os_log("Adding a new med entry.", log: OSLog.default, type: .debug)
                 
             case "ShowVaccineList":
                 //os_log("Reached the Show Vaccine List case.", log: OSLog.default, type: .debug)
@@ -176,7 +176,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 vaccineTablelViewController.dog = dog
                 
             case "AddMedFromDogDetail":
-                os_log("Adding a new med entry", log: OSLog.default, type: .debug)
+                os_log("Adding a new med entry from Dog Detail", log: OSLog.default, type: .debug)
                 
                 guard let vaccineDetailViewController = segue.destination as? VaccineDetailViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")

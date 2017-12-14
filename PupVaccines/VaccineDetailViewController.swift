@@ -133,27 +133,17 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     
         
         //For an existing dog, were vaccines exist, show a list with the most recent date
-       os_log("The trouble is with the vaccine dictionary code", log: OSLog.default, type: .debug)
         var allKeys: [String] = []
     
     //TDDO: Test to see if this check for a nil value is required
     if (dog?.vaccineDates) == nil {
         let newMedDictionary = [medSelected!: [dateSelected!]]
         dog?.vaccineDates? = newMedDictionary
-        //print(newMedDictionary)
-        //("Setting up a new dog with the first med: " )
-        //print(medSelected)
-        //print(dateSelected)
-        //dog?.vaccineDates![medSelected!] = [dateSelected!]
-        //print(dog?.vaccineDates)
     }
     else {
         for vaccineKeys in (dog?.vaccineDates)!{
             allKeys.append(vaccineKeys.key)
         }
-        //print("DEBUG")
-        //print(allKeys)
-    
         if allKeys.contains(medSelected!){
             //print("This one matches the keys")
             for vaccine in (dog?.vaccineDates)! {
