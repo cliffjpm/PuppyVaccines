@@ -67,7 +67,7 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
             pickerLabel?.textAlignment = .center
         }
         pickerLabel?.text = meds[row]
-        pickerLabel?.textColor = UIColor.blue
+        pickerLabel?.textColor = UIColor.black
         
         return pickerLabel!
     }
