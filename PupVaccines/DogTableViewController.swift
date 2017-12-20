@@ -37,8 +37,8 @@ class DogTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+    
+    // MARK: - TableView setup
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -77,14 +77,12 @@ class DogTableViewController: UITableViewController {
     }
  
 
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -100,24 +98,8 @@ class DogTableViewController: UITableViewController {
         }    
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -154,13 +136,8 @@ class DogTableViewController: UITableViewController {
     @IBAction func unwindToDogList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DogViewController, let dog = sourceViewController.dog {
             
-            //print("What is the Sender?")
-            //print(sender)
-            //print("DEBUG Unwind was called")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing dog.
-                //print("DEBUG I am updating the dog in the array")
-                //print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -169,21 +146,17 @@ class DogTableViewController: UITableViewController {
                 let newIndexPath = IndexPath(row: dogs.count, section: 0)
                 
                 dogs.append(dog)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                self.tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
             
             //Save the new Dog
             saveDogs()
         }
+        
     }
     
     func updateVaccines(dog: Dog) {
-       
-            //print("DEBUG Special fuction to update Vaccines")
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing dog.
-                //print("DEBUG I am updating vaccines for one dog in the array")
-                //print(dog.vaccineDates)
                 dogs[selectedIndexPath.row] = dog
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -228,18 +201,13 @@ class DogTableViewController: UITableViewController {
         //sort the dates
         vaccineOccurances.sort()
         
-        //vaccineOccurances.max()
-        /*for dateOfOccurances in vaccineOccurances{
-            //print(dateOfOccurances)
-        }*/
-        
-        
         //Set up some a sample of vaccines and occurances as Dictionary (String of  types + arrays of occurances)
         vaccines = [vaccineTypes[0]: vaccineOccurances, vaccineTypes[1]: vaccineOccurances, vaccineTypes[2]: vaccineOccurances]
         
         //Add a date to one in the array
         vaccines["Rabies"]??.append(formatter.date(from: "2020/10/08")!)
         
+        //Save this code as an example of iterating through the meds and selectng the latest date
         /*for meds in vaccines{
             print(meds.key + "")
             
@@ -277,7 +245,6 @@ class DogTableViewController: UITableViewController {
     }
     
     private func saveDogs() {
-        //print("SAVE DODS WAS CALLED")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(dogs, toFile: Dog.ArchiveURL.path)
         if isSuccessfulSave {
             os_log("Dogs successfully saved.", log: OSLog.default, type: .debug)
@@ -290,5 +257,20 @@ class DogTableViewController: UITableViewController {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Dog.ArchiveURL.path) as? [Dog]
     }
     
-
+    //MARK: Deprecated function
+    //This funciton allow the program to automatically save a new dog when calling another function
+    //For example, when adding a new dog and then adding a med, teh program automatically saves the new dog.
+    /*func autoAdd(dog: Dog){
+        // Add a dog.
+        let newIndexPath = IndexPath(row: dogs.count, section: 0)
+        
+        dogs.append(dog)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        self.tableView.reloadData()
+        print("DEBUG Called the autoAdd. Here is the new count")
+        print(dogs.count)
+    
+        //Save the new Dog
+        saveDogs()
+    }*/
 }

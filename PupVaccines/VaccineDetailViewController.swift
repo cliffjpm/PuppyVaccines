@@ -16,7 +16,6 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     @IBOutlet weak var medPicker: UIPickerView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    
     var dateFormatter : DateFormatter!
     let datePicker = UIDatePicker()
     var dateSelected: Date?
@@ -29,6 +28,8 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
      or constructed as part of adding a new Vaccine Occurance.
      */
     var dog: Dog?
+    var selectedMed: String?
+    var selectedMedDate: String?
 
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -110,6 +111,15 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
         self.datesText.delegate = self
         createDatePicker()
         updateSaveButtonState()
+        
+        //For new entries, use today as the default
+        dateSelected = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        datesText.text = dateFormatter.string(from: dateSelected!)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,6 +136,7 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
         super.prepare(for: segue, sender: sender)
         
         // Configure the destination view controller only when the save button is pressed.
+        //TODO: Please test to see if the next guard statement is necessary as i don't see it haveing an impact.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
             os_log("The save button on Vaccine Detail was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
@@ -145,7 +156,6 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
             allKeys.append(vaccineKeys.key)
         }
         if allKeys.contains(medSelected!){
-            //print("This one matches the keys")
             for vaccine in (dog?.vaccineDates)! {
                     //Update an existing med with a new date
                     if vaccine.key == medSelected {
@@ -202,14 +212,16 @@ class VaccineDetailViewController: UIViewController,UIPickerViewDataSource, UIPi
     //MARK: Private Methods
     private func updateSaveButtonState() {
         
+        print("DEBUGGING datesText and medSelected")
+        print(dateSelected)
+        print(medSelected)
+        print(saveButton)
         // Disable the Save button if the date is not set or there is no medication selected
         if (datesText.text == "Date") || (medSelected == nil){
             saveButton.isEnabled = false
-           // print("DEBUG: save button disabled")
         }
         else {
           saveButton.isEnabled = true
-            //print("DEBUG: save button enabled")
         }
     }
 

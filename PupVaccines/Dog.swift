@@ -57,18 +57,11 @@ class Dog: NSObject, NSCoding {
         self.photo = photo
         self.vaccineDates = vaccineDates
         
-        //self.vaccineDates = ["": [day1!]]
-        //print("DEBUG (Init) When creating a new dog the vaccine dictionary is: ")
-        //print(self.vaccineDates)
-        
     }
     
     convenience init?(name: String, dob: Date?, sex: String?, photo: UIImage?){
         
-        
         let vDates: [String: Array<Date>?] = [:]
-        //print("DEBUG (Convenience) When creating a new dog the vaccine dictionary is: ")
-        //print(vDates)
         
         self.init(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
         //os_log("These dogs were initialized with a Vaccine Dictionary.", log: OSLog.default, type: .debug)
@@ -105,7 +98,6 @@ class Dog: NSObject, NSCoding {
         let sex = aDecoder.decodeObject(forKey: PropertyKey.sex) as? String
         let vaccineDates = aDecoder.decodeObject(forKey: PropertyKey.vaccineDates) as? Dictionary<String, Array<Date>>
         //os_log("Decoding the Vaccine Dictionary was successful.>", log: OSLog.default, type: .debug)
-        //print(vaccineDates)
         
         
         // Must call designated initializer.

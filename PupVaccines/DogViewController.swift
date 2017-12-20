@@ -21,6 +21,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
    
     @IBAction func dateFieldTouched(_ sender: Any) {
@@ -78,9 +79,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
         
-        //Dedubbing picture
-        //dog?.photo = photoImageView.image
-        
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
@@ -118,7 +116,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     
     //MARK: Vaccine TableView Functions
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRows = 0
         if dog?.vaccineDates?.count == nil {
@@ -158,13 +155,39 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         
         super.prepare(for: segue, sender: sender)
         
-        //Configure the destination view controller only when the save button is pressed.
+        //Set up the new dog or revised dog variables
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        
+        let name = dogNameField.text ?? ""
+        let dob = dobSelected
+        var sex = sexSelected
+        
+        if sex == "" {sex = nil}
+        
+        var photo = photoImageView.image
+        var vDates: [String: Array<Date>?] = [:]
+        
+        if (dog?.vaccineDates != nil) {
+            vDates = (dog?.vaccineDates)!
+        }
+        
+        
+        // Set the dog to be passed to DogTableViewController after the unwind segue.
+        dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
+        os_log("Dog created to pass to DogTableViewController", log: OSLog.default, type: .debug)
+        
+        
+        //Configure the destination view controller but not when the save button is pressed.
+        //TODO: Need to determine if this check is rquired
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            
-            //os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            
+        os_log("The save button was not pressed. cancelling", log: OSLog.default, type: .debug)
+
             switch(segue.identifier ?? "") {
-                
+            
+            //TODO: Need to determine if this case is used anywhere
             case "AddVaccine":
                 os_log("Adding a new med entry.", log: OSLog.default, type: .debug)
                 
@@ -182,39 +205,17 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
                 vaccineDetailViewController.dog = dog
+                let dogTableView = DogTableViewController()
+                
+                //TODO: Test the app wihtout auto add feature
+                //dogTableView.autoAdd(dog: dog!)
                 
             default:
                 fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
             }
-            
             return
         }
         
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-        
-        let name = dogNameField.text ?? ""
-        let dob = dobSelected
-        let sex = sexSelected
-        var photo = photoImageView.image
-        //print("DEBUG: Photo is:")
-        //print(photo)
-        var vDates: [String: Array<Date>?] = [:]
-        
-        if (dog?.vaccineDates != nil) {
-            vDates = (dog?.vaccineDates)!
-        }
-        //os_log("Array of Vaccine Dates is populated", log: OSLog.default, type: .debug)
-        //print(vDates)
-        
-        // Set the dog to be passed to DogTableViewController after the unwind segue.
-        dog = Dog(name: name, dob: dob, sex: sex, photo: photo, vaccineDates: vDates)
-        //print("DEBUG testing to see what picture is in the new dog")
-        //print(dog?.photo)
-        //os_log("Dog created to pass to DogTavleViewController", log: OSLog.default, type: .debug)
-       
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -228,7 +229,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
         else if let owningNavigationController = navigationController{
             owningNavigationController.popViewController(animated: true)
-            //print("DEBUG as you were not in add mode. This got called and the records got saved. Won't work for a New Dog if addimg meds at the same time")
         }
         else {
             fatalError("The ViewController is not inside a navigation controller.")
@@ -318,6 +318,7 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             }
             
             sexSelected = (dog.sex ?? "")
+            
             switch(dog.sex ?? "") {
                 
             case "":
@@ -363,8 +364,6 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         
      //os_log("unwindToDogDetailList completed", log: OSLog.default, type: .debug)
         if let sourceViewController = sender.source as? VaccineDetailViewController, let dog = sourceViewController.dog {
-            //print("DEBUD I am back in the Dog view with a new array")
-            //print(dog.vaccineDates)
             
             //Reset and fill the arrays for neds and dates
             meds = []
@@ -374,20 +373,20 @@ class DogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
                 dates.append((vaccines.value?.max())!)
             }
             
-            //print("DEBUD new meds")
-            //print(meds)
-            //print("DEBUG new dates")
-            //print(dates)
-            
             self.tableView.reloadData()
             
             let DTVC = DogTableViewController()
             DTVC.updateVaccines(dog: dog)
             
+            /*This ensures that the user will Save the new dog once a vaccine is added
+            Avoiding the case where the dog gets saved on adding a new med but then not updating
+            the list view (tableView). Not the most elegant solutions as it does not take
+            into consideration all the use cases. For example cancelling the vaccing and
+            also wanting to cancel the new dog*/
+            //TODO: Test the app without disabling the cancel
+            //cancelButton.isEnabled = false
         }
     }
-    
-    
 
 }
 

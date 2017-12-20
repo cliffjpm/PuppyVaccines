@@ -55,10 +55,6 @@ class VaccineTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //MARK: Remove these debug statements
-        //var ss = "\(dates.count)"
-        //print("The number of rows is \(ss)")
-        //return (dog?.vaccineDates?.values.count)!
         return (dates.count)
     }
 
@@ -97,6 +93,22 @@ class VaccineTableViewController: UITableViewController {
             }
            
             vaccineDetailViewController.dog = dog
+            
+        case "EditMed":
+            guard let vaccineDetailViewController = segue.destination as? VaccineDetailViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedMedCell = sender as? VaccineTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            let selectedMed = selectedMedCell.vaccineMeds.text
+            let selectedMedDate = selectedMedCell.vaccineMedDates.text
+            
+            vaccineDetailViewController.dog = dog
+            vaccineDetailViewController.selectedMed = selectedMed
+            vaccineDetailViewController.selectedMedDate = selectedMedDate
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
